@@ -10,7 +10,7 @@ class MarksheetController extends Controller
 {
     public function all()
     {
-        $assignment = DB::table('assignments')->get();
+        $assignment = DB::table('marksheets')->get();
 
         return response()->json($assignment);
     }

@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\LocationController;
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\CourseController;
@@ -30,11 +29,6 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::post('refresh', 'AuthController@refresh');
     Route::post('register', 'AuthController@register');
 
-    /**Location Routes*/
-    Route::get('division',[LocationController::class, 'division'])->name('division');
-    Route::get('district',[LocationController::class, 'district'])->name('district');
-    Route::get('upazila',[LocationController::class, 'upazila'])->name('upazila');
-    Route::get('union',[LocationController::class, 'union'])->name('union');
 
     Route::prefix('assignment')->group(function () {
         Route::get('all',[AssignmentController::class,'all']);
@@ -82,6 +76,15 @@ Route::group(['middleware' => 'api'], function ($router) {
         Route::post('view',[AttendanceController::class,'view']);
         Route::post('update',[AttendanceController::class,'update']);
         Route::post('delete',[AttendanceController::class,'delete']);
+    });
+
+
+    /**marksheet api*/
+    Route::prefix('marksheet')->group(function () {
+        Route::post('create',[MarksheetController::class,'create']);
+        Route::post('view',[MarksheetController::class,'view']);
+        Route::post('update',[MarksheetController::class,'update']);
+        Route::post('delete',[MarksheetController::class,'delete']);
     });
 
 
