@@ -12,30 +12,29 @@ class AttendanceController extends Controller
 
     public function create(Request $request)
     {
-        return response()->json($request);
-//        if ($request->term == 'mid'){
-//            foreach ($request->attendance as $key => $data){
-//                $attendance = new MidAttendance();
-//                $attendance->student_id = $data['student_id'];
-//                $attendance->batch = $data['batch'];
-//                $attendance->course_name = $data['course_name'];
-//                $attendance->attendance = $data['attendance'];
-//                $attendance->date = $data['date'];
-//                $attendance->save();
-//            }
-//        }else{
-//            foreach ($request->attendance as $key => $data){
-//                $attendance = new FinalAttendance();
-//                $attendance->student_id = $data['student_id'];
-//                $attendance->batch = $data['batch'];
-//                $attendance->course_name = $data['course_name'];
-//                $attendance->attendance = $data['attendance'];
-//                $attendance->date = $data['date'];
-//                $attendance->save();
-//            }
-//        }
-//
-//        return response()->json( ['status' => 'success'] );
+        if ($request->term == 'mid'){
+            foreach ($request->attendance as $key => $data){
+                $attendance = new MidAttendance();
+                $attendance->student_id = $data['student_id'];
+                $attendance->batch = $data['batch'];
+                $attendance->course_name = $data['course_name'];
+                $attendance->attendance = $data['attendance'];
+                $attendance->date = $data['date'];
+                $attendance->save();
+            }
+        }else{
+            foreach ($request->attendance as $key => $data){
+                $attendance = new FinalAttendance();
+                $attendance->student_id = $data['student_id'];
+                $attendance->batch = $data['batch'];
+                $attendance->course_name = $data['course_name'];
+                $attendance->attendance = $data['attendance'];
+                $attendance->date = $data['date'];
+                $attendance->save();
+            }
+        }
+
+        return response()->json( ['status' => 'success'] );
     }
 
     public function view(Request $request)
