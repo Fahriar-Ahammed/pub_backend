@@ -13,8 +13,9 @@ class AttendanceController extends Controller
 
     public function create(Request $request)
     {
+        $attendanceData = json_decode($request->attendance, true);
         if ($request->term == 'mid'){
-            foreach ($request->attendance as $key => $data){
+            foreach ($attendanceData as $key => $data){
                 $attendance = new MidAttendance();
                 $attendance->student_id = $data['student_id'];
                 $attendance->batch = $request->batch;
@@ -24,7 +25,7 @@ class AttendanceController extends Controller
                 $attendance->save();
             }
         }else{
-            foreach ($request->attendance as $key => $data){
+            foreach ($attendanceData as $key => $data){
                 $attendance = new FinalAttendance();
                 $attendance->student_id = $data['student_id'];
                 $attendance->batch = $request->batch;
