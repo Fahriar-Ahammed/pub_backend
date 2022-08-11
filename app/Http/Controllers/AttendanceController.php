@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\FinalAttendance;
 use App\Models\MidAttendance;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -16,20 +17,20 @@ class AttendanceController extends Controller
             foreach ($request->attendance as $key => $data){
                 $attendance = new MidAttendance();
                 $attendance->student_id = $data['student_id'];
-                $attendance->batch = $data['batch'];
-                $attendance->course_name = $data['course_name'];
+                $attendance->batch = $request->batch;
+                $attendance->course_name = $request->course_name;
                 $attendance->attendance = $data['attendance'];
-                $attendance->date = $data['date'];
+                $attendance->date = Carbon::now();
                 $attendance->save();
             }
         }else{
             foreach ($request->attendance as $key => $data){
                 $attendance = new FinalAttendance();
                 $attendance->student_id = $data['student_id'];
-                $attendance->batch = $data['batch'];
-                $attendance->course_name = $data['course_name'];
+                $attendance->batch = $request->batch;
+                $attendance->course_name = $request->course_name;
                 $attendance->attendance = $data['attendance'];
-                $attendance->date = $data['date'];
+                $attendance->date = Carbon::now();
                 $attendance->save();
             }
         }
