@@ -8,9 +8,11 @@ use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
-    public function all()
+    public function all(Request $request)
     {
-        $student = DB::table('students')->get();
+        $student = DB::table('students')
+            ->where('batch',$request->batch)
+            ->get();
 
         return response()->json($student);
     }
