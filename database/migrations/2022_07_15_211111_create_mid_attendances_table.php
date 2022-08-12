@@ -13,7 +13,7 @@ class CreateMidAttendancesTable extends Migration
             $table->bigInteger('student_id');
             $table->string('batch');
             $table->string('course_name');
-            $table->boolean('attendance');
+            $table->string('attendance');
             $table->date('date');
             $table->timestamps();
         });
