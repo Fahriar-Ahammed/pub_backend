@@ -8,6 +8,19 @@ use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
 {
+    public function courseBatchWise(Request $request)
+    {
+        $semester = DB::table('students')
+            ->where('batch',$request->batch)
+            ->first();
+
+        $course = DB::table('courses')
+            ->where('semester',$semester->semester)
+            ->get();
+
+        return response()->json($course);
+    }
+
     public function all()
     {
         $course = DB::table('courses')->get();
