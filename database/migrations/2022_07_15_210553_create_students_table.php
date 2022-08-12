@@ -13,6 +13,7 @@ class CreateStudentsTable extends Migration
             $table->string('pub_id');
             $table->string('name');
             $table->string('batch');
+            $table->integer('semester');
             $table->string('contact_number');
             $table->string('parents_number');
             $table->timestamps();
