@@ -52,6 +52,7 @@ Route::group(['middleware' => 'api'], function ($router) {
         Route::get('view/{id}',[StudentController::class,'view']);
         Route::post('update',[StudentController::class,'update']);
         Route::get('delete/{id}',[StudentController::class,'delete']);
+        Route::post('all-batch',[StudentController::class,'allBatch']);
     });
 
     Route::prefix('teacher')->group(function () {
