@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -8,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 
 class AuthController extends Controller
-{ 
+{
     /**
      * Create a new AuthController instance.
      *
@@ -18,7 +19,7 @@ class AuthController extends Controller
     {
         $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
-  
+
     /**
      * Register new user.
      *
@@ -29,21 +30,21 @@ class AuthController extends Controller
             'name'      => 'required',
             'email'     => 'required|email|unique:users',
             'password'  => 'required|min:4|confirmed',
-        ]);        
+        ]);
         if ($validate->fails()){
             return response()->json([
                 'status' => 'error',
                 'errors' => $validate->errors()
             ], 422);
-        }        
+        }
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->status = 'Active';
-        $user->save();       
+        $user->save();
         return response()->json(['status' => 'success'], 200);
-    } 
+    }
 
     /**
      * Get a JWT via given credentials.
@@ -93,12 +94,19 @@ class AuthController extends Controller
     protected function respondWithToken($token, $email)
     {
         $user = User::select('menuroles as roles')->where('email', '=', $email)->first();
+        $teacher = Teacher::where('user_id',$user->id)->first();
+        if ($teacher){
+            $teacher_id = $teacher->id;
+        }else{
+            $teacher_id = null;
+        }
 
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60,
             'roles' => $user->roles,
+            'teacher_id' => $teacher_id
         ]);
     }
 }
