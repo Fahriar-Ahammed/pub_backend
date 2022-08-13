@@ -17,6 +17,11 @@ class Users extends Model
         return $this->hasMany('App\Notes');
     }
 
+    public function teacher()
+    {
+        return $this->hasOne(Teacher::class,'user_id');
+    }
+
     protected $dates = [
         'deleted_at'
     ];
