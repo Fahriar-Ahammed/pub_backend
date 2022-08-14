@@ -17,7 +17,8 @@ class MarksheetController extends Controller
 
     public function create(Request $request)
     {
-        foreach ($request->marks as $key => $data){
+        $marks = json_decode($request->marks, true);
+        foreach ($marks as $key => $data){
             $marksheet = new Marksheet();
             $marksheet->student_id = $request->student_id;
             $marksheet->batch = $request->batch;
