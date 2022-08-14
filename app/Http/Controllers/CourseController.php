@@ -16,6 +16,7 @@ class CourseController extends Controller
 
         $course = DB::table('courses')
             ->where('semester',$semester->semester)
+            ->where('teacher_id',$request->teacher_id)
             ->get();
 
         return response()->json($course);

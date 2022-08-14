@@ -94,7 +94,7 @@ class AuthController extends Controller
     protected function respondWithToken($token, $email)
     {
         $user = User::select('menuroles as roles')->where('email', '=', $email)->first();
-        $teacher = Teacher::where('user_id',$user->id)->first();
+        $teacher = Teacher::where('email',$email)->first();
         if ($teacher){
             $teacher_id = $teacher->id;
         }else{
