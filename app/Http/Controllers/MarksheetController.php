@@ -21,7 +21,7 @@ class MarksheetController extends Controller
             ->where('batch',$request->batch)
             ->where('course',$request->course)
             ->where('term',$request->term)
-            ->first();
+            ->get();
 
         return response()->json($marksheeet);
     }
