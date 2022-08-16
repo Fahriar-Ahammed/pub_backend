@@ -87,6 +87,7 @@ Route::group(['middleware' => 'api'], function ($router) {
         Route::post('view',[MarksheetController::class,'view']);
         Route::post('update',[MarksheetController::class,'update']);
         Route::post('delete',[MarksheetController::class,'delete']);
+        Route::post('teacher-wise',[MarksheetController::class,'teacherWise']);
     });
 
 

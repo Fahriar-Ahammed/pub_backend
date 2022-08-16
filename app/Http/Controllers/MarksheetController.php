@@ -10,9 +10,20 @@ class MarksheetController extends Controller
 {
     public function all()
     {
-        $assignment = DB::table('marksheets')->get();
+        $marksheeet = DB::table('marksheets')->get();
 
-        return response()->json($assignment);
+        return response()->json($marksheeet);
+    }
+
+    public function teacherWise(Request $request)
+    {
+        $marksheeet = DB::table('marksheets')
+            ->where('batch',$request->batch)
+            ->where('course',$request->course)
+            ->where('term',$request->term)
+            ->first();
+
+        return response()->json($marksheeet);
     }
 
     public function create(Request $request)
