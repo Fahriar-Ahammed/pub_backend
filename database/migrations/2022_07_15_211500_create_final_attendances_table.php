@@ -14,7 +14,6 @@ class CreateFinalAttendancesTable extends Migration
             $table->string('batch');
             $table->string('course_name');
             $table->string('attendance');
-            $table->date('date');
             $table->timestamps();
         });
     }

@@ -14,15 +14,17 @@ class AttendanceController extends Controller
     {
         if ($request->term == 'mid'){
             $attendance = DB::table('mid_attendances')
+                ->select('created_at')
                 ->where('batch',$request->batch)
                 ->where('course_name',$request->course)
-                ->distinct('created_at')
+                ->distinct()
                 ->get();
         }else{
             $attendance = DB::table('final_attendances')
+                ->select('created_at')
                 ->where('batch',$request->batch)
                 ->where('course_name',$request->course)
-                ->distinct('created_at')
+                ->distinct()
                 ->get();
         }
 
