@@ -19,6 +19,7 @@ class PresentationController extends Controller
     {
         $presentation = new presentation();
         $presentation->batch = $request->batch;
+        $presentation->term = $request->term;
         $presentation->course_name = $request->course_name;
         $presentation->presentation_details = $request->presentation_details;
         $presentation->submission_date = $request->submission_date;

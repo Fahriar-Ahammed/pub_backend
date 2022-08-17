@@ -19,6 +19,7 @@ class AssignmentController extends Controller
     {
         $assignment = new assignment();
         $assignment->batch = $request->batch;
+        $assignment->term = $request->term;
         $assignment->course_name = $request->course_name;
         $assignment->assignment_details = $request->assignment_details;
         $assignment->submission_date = $request->submission_date;

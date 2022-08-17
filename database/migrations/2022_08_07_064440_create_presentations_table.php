@@ -11,6 +11,7 @@ class CreatePresentationsTable extends Migration
         Schema::create('presentations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('batch');
+            $table->string('term');
             $table->string('course_name');
             $table->string('presentation_details');
             $table->date('submission_date');
