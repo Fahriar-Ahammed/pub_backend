@@ -77,6 +77,7 @@ Route::group(['middleware' => 'api'], function ($router) {
         Route::post('create',[AttendanceController::class,'create']);
         Route::post('view',[AttendanceController::class,'view']);
         Route::post('update',[AttendanceController::class,'update']);
+        Route::post('date-wise',[AttendanceController::class,'dateWise']);
         Route::post('delete',[AttendanceController::class,'delete']);
     });
 
