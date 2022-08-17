@@ -12,7 +12,7 @@ class AttendanceController extends Controller
 {
     public function dateWise(Request $request)
     {
-        if ($request->term == 'mid'){
+        if ($request->term == 'Mid'){
             $attendance = DB::table('mid_attendances')
                 ->select('created_at')
                 ->where('batch',$request->batch)
