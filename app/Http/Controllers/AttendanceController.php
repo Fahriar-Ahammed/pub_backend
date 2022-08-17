@@ -41,7 +41,6 @@ class AttendanceController extends Controller
                 $attendance->batch = $request->batch;
                 $attendance->course_name = $request->course_name;
                 $attendance->attendance = $data['attendance'];
-                $attendance->date = Carbon::now()->format('y-m-d');
                 $attendance->save();
             }
         }else{
@@ -51,7 +50,6 @@ class AttendanceController extends Controller
                 $attendance->batch = $request->batch;
                 $attendance->course_name = $request->course_name;
                 $attendance->attendance = $data['attendance'];
-                $attendance->date = Carbon::now();
                 $attendance->save();
             }
         }
