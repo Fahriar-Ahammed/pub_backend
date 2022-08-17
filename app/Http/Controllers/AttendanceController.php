@@ -10,6 +10,24 @@ use Illuminate\Support\Facades\DB;
 
 class AttendanceController extends Controller
 {
+    public function dateWise(Request $request)
+    {
+        if ($request->term == 'mid'){
+            $attendance = DB::table('mid_attendances')
+                ->where('batch',$request->batch)
+                ->where('course_name',$request->course)
+                ->distinct('created_at')
+                ->get();
+        }else{
+            $attendance = DB::table('final_attendances')
+                ->where('batch',$request->batch)
+                ->where('course_name',$request->course)
+                ->distinct('created_at')
+                ->get();
+        }
+
+        return response()->json($attendance);
+    }
 
     public function create(Request $request)
     {

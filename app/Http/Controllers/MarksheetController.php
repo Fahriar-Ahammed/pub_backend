@@ -63,8 +63,7 @@ class MarksheetController extends Controller
     {
         $marks = json_decode($request->marks, true);
         foreach ($marks as $key => $data){
-            $marksheet = DB::table('marksheets')
-                ->where('student_id',$data['student_id'])
+            $marksheet = Marksheet::where('student_id',$data['student_id'])
                 ->where('course',$request->course_name)
                 ->where('term',$request->term)
                 ->first();
