@@ -54,7 +54,7 @@ class MarksheetController extends Controller
     {
         $marksheet = DB::table('marksheets')
             ->where('batch',$request->batch)
-            ->where('course_name',$request->course)->get();
+            ->where('course',$request->course)->get();
 
         return response()->json($marksheet);
     }
