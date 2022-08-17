@@ -61,16 +61,21 @@ class MarksheetController extends Controller
 
     public function update(Request $request)
     {
-        foreach ($request->marks as $key => $data){
-            $marksheet = Marksheet::find($request->id);
-            if ($request->assignment){
-                $marksheet->assignment = $request->assignment;
-            }else if ($request->presentation){
-                $marksheet->presentation = $request->presentation;
-            }else if ($request->class_test){
-                $marksheet->class_test = $request->class_test;
-            }else if ($request->course_mark){
-                $marksheet->course_mark = $request->course_mark;
+        $marks = json_decode($request->marks, true);
+        foreach ($marks as $key => $data){
+            $marksheet = DB::table('marksheets')
+                ->where('student_id',$data['student_id'])
+                ->where('course',$request->course_name)
+                ->where('term',$request->term)
+                ->first();
+            if ($data['assignment_mark']){
+                $marksheet->assignment = $data['assignment_mark'];
+            }else if ($data['presentation_mark']){
+                $marksheet->presentation = $data['presentation_mark'];
+            }else if ($data['class_test_mark']){
+                $marksheet->class_test = $data['class_test_mark'];
+            }else if ($data['course_mark']){
+                $marksheet->course_mark = $data['course_mark'];
             }
             $marksheet->save();
         }
