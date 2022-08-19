@@ -34,7 +34,7 @@ class AttendanceController extends Controller
     public function create(Request $request)
     {
         $attendanceData = json_decode($request->attendance, true);
-        if ($request->term == 'mid'){
+        if ($request->term == 'Mid'){
             foreach ($attendanceData as $key => $data){
                 $attendance = new MidAttendance();
                 $attendance->student_id = $data['student_id'];
@@ -59,7 +59,7 @@ class AttendanceController extends Controller
 
     public function view(Request $request)
     {
-        if ($request->term == 'mid'){
+        if ($request->term == 'Mid'){
             $attendance = DB::table('mid_attendances')
                 ->where('batch',$request->batch)
                 ->where('course_name',$request->course)->get();
@@ -74,7 +74,7 @@ class AttendanceController extends Controller
 
     public function update(Request $request)
     {
-        if ($request->term == 'mid'){
+        if ($request->term == 'Mid'){
             foreach ($request->attendance as $key => $data){
                 $attendance = MidAttendance::find($request->id);
                 $attendance->attendance = $data['attendance'];
@@ -95,7 +95,7 @@ class AttendanceController extends Controller
 
     public function delete(Request $request)
     {
-        if ($request->term == 'mid'){
+        if ($request->term == 'Mid'){
             $attendance = MidAttendance::find($request->id);
             if($attendance){
                 $attendance->delete();
