@@ -14,7 +14,7 @@ class ClassRoutineDaysController extends Controller
             ->where('department',$request->department)
             ->with(['nineAm'=> function ($query){
                 $query->with('teacher')->get();
-            }],['tenAm'=> function ($query){
+            },'tenAm'=> function ($query){
                 $query->with('teacher')->get();
             }])
             ->get();
