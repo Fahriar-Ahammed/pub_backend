@@ -12,7 +12,9 @@ class ClassRoutineDaysController extends Controller
     {
         $routine = ClassRoutineDay::where('batch',$request->batch)
             ->where('department',$request->department)
-            ->with('nineAm')
+            ->with(['nineAm'=> function($query){
+                $query->select('id','course_title','course_code');
+            }])
             ->get();
 
         return response()->json($routine);
