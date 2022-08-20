@@ -10,4 +10,8 @@ class ClassRoutineDay extends Model
     {
         return $this->belongsTo(Course::class,'nine_am','id');
     }
+    public function tenAm()
+    {
+        return $this->belongsTo(Course::class,'ten_am','id');
+    }
 }
