@@ -10,7 +10,7 @@ class ClassRoutineDay extends Model
     {
         return $this->belongsTo(Course::class, 'nine_am', 'id')
             ->with(['teacher' => function($query){
-                return $query->select('name');
+                $query->select('name');
             }]);
     }
 
