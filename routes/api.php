@@ -8,6 +8,7 @@ use App\Http\Controllers\MarksheetController;
 use App\Http\Controllers\PresentationController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\ClassRoutineDaysController;
 
 
 /*
@@ -89,6 +90,15 @@ Route::group(['middleware' => 'api'], function ($router) {
         Route::post('update',[MarksheetController::class,'update']);
         Route::post('delete',[MarksheetController::class,'delete']);
         Route::post('teacher-wise',[MarksheetController::class,'teacherWise']);
+    });
+
+    /**class Routine api*/
+    Route::prefix('routine')->group(function () {
+        Route::post('create',[ClassRoutineDaysController::class,'index']);
+//        Route::post('view',[MarksheetController::class,'view']);
+//        Route::post('update',[MarksheetController::class,'update']);
+//        Route::post('delete',[MarksheetController::class,'delete']);
+//        Route::post('teacher-wise',[MarksheetController::class,'teacherWise']);
     });
 
 
