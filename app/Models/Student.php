@@ -9,11 +9,12 @@ class Student extends Model
     public function midAttendance()
     {
         return $this->hasMany(MidAttendance::class,'student_id','pub_id')
-            ->select('attendance');
+            ->select('student_id','attendance');
     }
 
     public function finalAttendance()
     {
-        return $this->hasMany(FinalAttendance::class,'student_id','pub_id');
+        return $this->hasMany(FinalAttendance::class,'student_id','pub_id')
+            ->select('student_id','attendance');
     }
 }
