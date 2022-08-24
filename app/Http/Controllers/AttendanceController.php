@@ -59,15 +59,21 @@ class AttendanceController extends Controller
 
     public function view(Request $request)
     {
-        if ($request->term == 'Mid'){
-            $attendance = DB::table('mid_attendances')
-                ->where('batch',$request->batch)
-                ->where('course_name',$request->course)->get();
-        }else{
-            $attendance = DB::table('final_attendances')
-                ->where('batch',$request->batch)
-                ->where('course_name',$request->course)->get();
-        }
+//        if ($request->term == 'Mid'){
+//            $attendance = DB::table('mid_attendances')
+//                ->where('batch',$request->batch)
+//                ->where('course_name',$request->course)->get();
+//        }else{
+//            $attendance = DB::table('final_attendances')
+//                ->where('batch',$request->batch)
+//                ->where('course_name',$request->course)->get();
+//        }
+
+
+        $attendance = MidAttendance::select('student_id')
+            ->with('midAttendance')
+            ->get();
+
 
         return response()->json($attendance);
     }
