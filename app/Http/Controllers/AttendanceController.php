@@ -62,12 +62,14 @@ class AttendanceController extends Controller
     {
         if ($request->term == 'Mid'){
             $attendance = Student::select('pub_id')
+                ->where('batch',$request->batch)
                 ->with(['midAttendance' => function($query) use ($request) {
                     $query->where('course_name',$request->course);
                 }])
                 ->get();
         }else{
             $attendance = Student::select('pub_id')
+                ->where('batch',$request->batch)
                 ->with(['finalAttendance' => function($query) use ($request) {
                     $query->where('course_name',$request->course);
                 }])
