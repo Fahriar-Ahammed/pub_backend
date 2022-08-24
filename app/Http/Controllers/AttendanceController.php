@@ -72,7 +72,9 @@ class AttendanceController extends Controller
 
 
         $attendance = Student::select('pub_id')
-            ->with('midAttendance')
+            ->with(['midAttendance' => function($query) use ($request) {
+                $query->where('course_name',$request->course);
+            }])
             ->get();
 
 

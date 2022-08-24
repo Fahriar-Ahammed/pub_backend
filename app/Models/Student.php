@@ -8,7 +8,8 @@ class Student extends Model
 {
     public function midAttendance()
     {
-        return $this->hasMany(MidAttendance::class,'student_id','pub_id');
+        return $this->hasMany(MidAttendance::class,'student_id','pub_id')
+            ->select('attendance');
     }
 
     public function finalAttendance()
