@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\FinalAttendance;
 use App\Models\MidAttendance;
+use App\Models\Student;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -70,7 +71,7 @@ class AttendanceController extends Controller
 //        }
 
 
-        $attendance = MidAttendance::select('student_id')
+        $attendance = Student::select('pub_id')
             ->with('midAttendance')
             ->get();
 
