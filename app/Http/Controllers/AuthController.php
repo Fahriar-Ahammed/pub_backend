@@ -20,6 +20,11 @@ class AuthController extends Controller
         $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
 
+    public function user()
+    {
+        return response()->json(auth()->user());
+    }
+
     /**
      * Register new user.
      *

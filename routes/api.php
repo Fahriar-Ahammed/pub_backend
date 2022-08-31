@@ -29,6 +29,7 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('register', 'AuthController@register');
+    Route::get('user', 'AuthController@user');
 
 
     Route::prefix('assignment')->group(function () {
