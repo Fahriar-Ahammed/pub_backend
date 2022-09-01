@@ -10,9 +10,9 @@ class CreateStudentsTable extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('batch_id');
             $table->string('pub_id');
             $table->string('name');
-            $table->string('batch');
             $table->integer('semester');
             $table->string('contact_number');
             $table->string('parents_number');
