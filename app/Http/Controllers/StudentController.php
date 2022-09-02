@@ -39,9 +39,9 @@ class StudentController extends Controller
         return response()->json($student);
     }
 
-    public function update(Request $request,$id)
+    public function update(Request $request)
     {
-        $student = Student::find($id);
+        $student = Student::find($request->id);
         $student->batch_id = $request->batch_id;
         $student->pub_id = $request->pub_id;
         $student->name = $request->name;
