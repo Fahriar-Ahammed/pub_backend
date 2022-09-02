@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
-
+    //all student
     public function all(Request $request)
     {
         $student = DB::table('students')
