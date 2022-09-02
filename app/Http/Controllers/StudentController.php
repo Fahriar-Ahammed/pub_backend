@@ -12,7 +12,7 @@ class StudentController extends Controller
     public function all(Request $request)
     {
         $student = DB::table('students')
-            ->where('batch',$request->batch)
+            ->where('batch_id',$request->batch_id)
             ->get();
 
         return response()->json($student);
