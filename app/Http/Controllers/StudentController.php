@@ -42,9 +42,10 @@ class StudentController extends Controller
     public function update(Request $request,$id)
     {
         $student = Student::find($id);
+        $student->batch_id = $request->batch_id;
         $student->pub_id = $request->pub_id;
         $student->name = $request->name;
-        $student->batch = $request->batch;
+        $student->semester = $request->semester;
         $student->contact_number = $request->contact_number;
         $student->parents_number = $request->parents_number;
         $student->save();
