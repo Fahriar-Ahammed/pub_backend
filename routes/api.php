@@ -9,6 +9,7 @@ use App\Http\Controllers\PresentationController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\ClassRoutineDaysController;
+use App\Http\Controllers\BatchesController;
 
 
 /*
@@ -30,6 +31,10 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::post('refresh', 'AuthController@refresh');
     Route::post('register', 'AuthController@register');
     Route::get('user', 'AuthController@user');
+
+    Route::prefix('batch')->group(function (){
+        Route::get('all',[BatchesController::class,'all']);
+    });
 
 
     Route::prefix('assignment')->group(function () {
@@ -54,7 +59,6 @@ Route::group(['middleware' => 'api'], function ($router) {
         Route::get('view/{id}',[StudentController::class,'view']);
         Route::post('update',[StudentController::class,'update']);
         Route::get('delete/{id}',[StudentController::class,'delete']);
-        Route::get('all-batch',[StudentController::class,'allBatch']);
     });
 
     Route::prefix('teacher')->group(function () {

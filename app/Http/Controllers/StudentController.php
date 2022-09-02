@@ -8,15 +8,6 @@ use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
-    public function allBatch()
-    {
-        $batch = DB::table('students')
-            ->select('batch')
-            ->distinct()
-            ->get();
-
-        return response()->json($batch);
-    }
 
     public function all(Request $request)
     {
