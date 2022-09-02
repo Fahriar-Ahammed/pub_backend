@@ -10,6 +10,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\ClassRoutineDaysController;
 use App\Http\Controllers\BatchesController;
+use App\Http\Controllers\DepartmentsController;
 
 
 /*
@@ -33,7 +34,12 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::get('user', 'AuthController@user');
 
     Route::prefix('batch')->group(function (){
-        Route::get('all',[BatchesController::class,'all']);
+        Route::get('all/{id}',[BatchesController::class,'all']);
+    });
+
+    /*department api*/
+    Route::prefix('department')->group(function (){
+        Route::get('all',[DepartmentsController::class,'all']);
     });
 
 

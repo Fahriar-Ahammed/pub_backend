@@ -8,9 +8,10 @@ use Illuminate\Support\Facades\DB;
 
 class BatchesController extends Controller
 {
-    public function all()
+    public function all($id)
     {
         $batch = DB::table('batches')
+            ->where('department_id',$id)
             ->latest()->get();
 
         return response()->json($batch);
