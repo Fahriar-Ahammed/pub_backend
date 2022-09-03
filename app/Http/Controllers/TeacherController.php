@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Teacher;
 use App\Models\User;
+use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -11,7 +12,7 @@ class TeacherController extends Controller
 {
     public function all()
     {
-        $teacher = DB::table('teachers')->get();
+        $teacher = DB::table('users')->get();
 
         return response()->json($teacher);
     }
@@ -19,18 +20,13 @@ class TeacherController extends Controller
     public function create(Request $request)
     {
         $user = new User;
+        $user->department_id = $request->department_id;
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->contact_number = $request->contact_number;
         $user->password = bcrypt($request->password);
         $user->status = 'Active';
         $user->save();
-
-        $teacher = new Teacher();
-        $teacher->name = $request->name;
-        $teacher->department = $request->department;
-        $teacher->email = $request->email;
-        $teacher->contact_number = $request->contact_number;
-        $teacher->save();
 
         return response()->json( ['status' => 'success'] );
     }
@@ -42,14 +38,14 @@ class TeacherController extends Controller
         return response()->json($teacher);
     }
 
-    public function update(Request $request,$id)
+    public function update(Request $request)
     {
-        $teacher = Teacher::find($id);
-        $teacher->name = $request->name;
-        $teacher->department = $request->department;
-        $teacher->email = $request->email;
-        $teacher->contact_number = $request->contact_number;
-        $teacher->save();
+        $user = Users::find($request->id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->contact_number = $request->contact_number;
+        $user->password = bcrypt($request->password);
+        $user->save();
 
         return response()->json( ['status' => 'success'] );
     }

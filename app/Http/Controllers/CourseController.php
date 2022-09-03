@@ -22,9 +22,11 @@ class CourseController extends Controller
         return response()->json($course);
     }
 
-    public function all()
+    public function all($id)
     {
-        $course = DB::table('courses')->get();
+        $course = DB::table('courses')
+            ->where('department_id',$id)
+            ->get();
 
         return response()->json($course);
     }
@@ -32,6 +34,8 @@ class CourseController extends Controller
     public function create(Request $request)
     {
         $course = new Course();
+        $course->department_id = $request->department_id;
+        $course->semester = $request->semester;
         $course->course_code = $request->course_code;
         $course->course_title = $request->course_title;
         $course->save();
@@ -46,9 +50,10 @@ class CourseController extends Controller
         return response()->json($course);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $course = Course::find($id);
+        $course = Course::find($request->id);
+        $course->semester = $request->semester;
         $course->course_code = $request->course_code;
         $course->course_title = $request->course_title;
         $course->save();
