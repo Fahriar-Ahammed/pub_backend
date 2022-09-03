@@ -13,6 +13,7 @@ class TeacherController extends Controller
     public function all($id)
     {
         $teacher = DB::table('users')
+            ->select('name','contact_number','email')
             ->where('department_id',$id)
             ->get();
 
