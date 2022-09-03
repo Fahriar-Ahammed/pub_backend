@@ -10,9 +10,11 @@ use Illuminate\Support\Facades\DB;
 
 class TeacherController extends Controller
 {
-    public function all()
+    public function all($id)
     {
-        $teacher = DB::table('users')->get();
+        $teacher = DB::table('users')
+            ->where('department_id',$id)
+            ->get();
 
         return response()->json($teacher);
     }

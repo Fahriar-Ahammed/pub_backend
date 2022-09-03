@@ -68,7 +68,7 @@ Route::group(['middleware' => 'api'], function ($router) {
     });
 
     Route::prefix('teacher')->group(function () {
-        Route::get('all',[TeacherController::class,'all']);
+        Route::get('all/{id}',[TeacherController::class,'all']);
         Route::post('create',[TeacherController::class,'create']);
         Route::get('view/{id}',[TeacherController::class,'view']);
         Route::post('update',[TeacherController::class,'update']);
