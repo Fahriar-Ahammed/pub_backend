@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Teacher;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,6 +18,13 @@ class TeacherController extends Controller
 
     public function create(Request $request)
     {
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->status = 'Active';
+        $user->save();
+
         $teacher = new Teacher();
         $teacher->name = $request->name;
         $teacher->department = $request->department;
