@@ -19,7 +19,7 @@ class Users extends Model
 
     public function teacher()
     {
-        return $this->hasOne(Teacher::class,'user_id');
+        return $this->hasMany(Course::class,'teacher_id');
     }
 
     protected $dates = [
