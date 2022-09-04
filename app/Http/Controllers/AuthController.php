@@ -100,19 +100,13 @@ class AuthController extends Controller
     protected function respondWithToken($token, $email)
     {
         $user = User::select('menuroles as roles')->where('email', '=', $email)->first();
-        $teacher = Teacher::where('email',$email)->first();
-        if ($teacher){
-            $teacher_id = $teacher->id;
-        }else{
-            $teacher_id = null;
-        }
 
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60,
             'roles' => $user->roles,
-            'teacher_id' => $teacher_id
+            'teacher_id' => $user->id
         ]);
     }
 }

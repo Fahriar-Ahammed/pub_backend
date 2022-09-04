@@ -17,6 +17,15 @@ class BatchesController extends Controller
         return response()->json($batch);
     }
 
+    public function allBatches()
+    {
+        $batch = DB::table('batches')
+            ->select('department_id','name')
+            ->latest()->get();
+
+        return response()->json($batch);
+    }
+
     public function create()
     {
 
