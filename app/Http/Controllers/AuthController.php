@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Teacher;
 use App\Models\User;
+use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -100,13 +101,13 @@ class AuthController extends Controller
     protected function respondWithToken($token, $email)
     {
         $user = User::select('menuroles as roles')->where('email', '=', $email)->first();
-
+        $users = Users::where('email',$email)->first();
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60,
             'roles' => $user->roles,
-            'teacher_id' => $user->id
+            'teacher_id' => $users->id
         ]);
     }
 }
