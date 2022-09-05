@@ -14,10 +14,10 @@ class CreateMarksheetsTable extends Migration
             $table->string('batch');
             $table->string('course');
             $table->string('term');
-            $table->string('assignment')->nullable();
-            $table->string('presentation')->nullable();
-            $table->string('class_test')->nullable();
-            $table->string('course_mark')->nullable();
+            $table->string('assignment')->default('-');
+            $table->string('presentation')->default('-');
+            $table->string('class_test')->default('-');
+            $table->string('course_mark')->default('-');
             $table->timestamps();
         });
     }
