@@ -68,10 +68,15 @@ class MarksheetController extends Controller
                 ->where('term',$request->term)
                 ->first();
             if ($marksheet){
-                $marksheet->assignment = $data['assignment_mark'];
-                $marksheet->presentation = $data['presentation_mark'];
-                $marksheet->class_test = $data['class_test_mark'];
-                $marksheet->course_mark = $data['course_mark'];
+                if ($data['assignment_mark']){
+                    $marksheet->assignment = $data['assignment_mark'];
+                }else if ($data['presentation_mark']){
+                    $marksheet->presentation = $data['presentation_mark'];
+                }else if ($data['class_test_mark']){
+                    $marksheet->class_test = $data['class_test_mark'];
+                }else if ($data['course_mark']){
+                    $marksheet->course_mark = $data['course_mark'];
+                }
                 $marksheet->save();
             }else{
                 $marksheet = new Marksheet();
