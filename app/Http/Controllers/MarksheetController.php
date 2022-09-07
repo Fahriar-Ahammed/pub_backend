@@ -61,9 +61,15 @@ class MarksheetController extends Controller
 
     public function update(Request $request)
     {
-        $marks = json_decode($request->marks, true);
+        $assignmentMarkData = json_decode($request->assignmentMarkData, true);
+        $classTestMarkData = json_decode($request->classTestMarkData, true);
+        $presentationMarkData = json_decode($request->presentationMarkData, true);
+        $courseMarkMarkData = json_decode($request->courseMarkMarkData, true);
 
-        $this->markInput($marks,$request,"assignment",'assignment_mark');
+        $this->markInput($assignmentMarkData,$request,"assignment",'assignment_mark');
+        $this->markInput($classTestMarkData,$request,"class_test",'class_test_mark');
+        $this->markInput($presentationMarkData,$request,"presentation",'presentation_mark');
+        $this->markInput($courseMarkMarkData,$request,"course_mark",'course_mark');
         return response()->json( ['status' => 'success'] );
     }
 
