@@ -62,42 +62,8 @@ class MarksheetController extends Controller
     public function update(Request $request)
     {
         $marks = json_decode($request->marks, true);
-        foreach ($marks as $key => $data){
-            $marksheet = Marksheet::where('student_id',$data['student_id'])
-                ->where('course',$request->course_name)
-                ->where('term',$request->term)
-                ->first();
-            if ($marksheet){
-                if ($data['assignment_mark']){
-                    $marksheet->assignment = $data['assignment_mark'];
-                }else if ($data['presentation_mark']){
-                    $marksheet->presentation = $data['presentation_mark'];
-                }else if ($data['class_test_mark']){
-                    $marksheet->class_test = $data['class_test_mark'];
-                }else if ($data['course_mark']){
-                    $marksheet->course_mark = $data['course_mark'];
-                }
-                $marksheet->save();
-            }else{
-                $marksheet = new Marksheet();
-                $marksheet->student_id = $data['student_id'];
-                $marksheet->batch = $request->batch;
-                $marksheet->term = $request->term;
-                $marksheet->course = $request->course_name;
-                if ($data['assignment_mark']){
-                    $marksheet->assignment = $data['assignment_mark'];
-                }else if ($data['presentation_mark']){
-                    $marksheet->presentation = $data['presentation_mark'];
-                }else if ($data['class_test_mark']){
-                    $marksheet->class_test = $data['class_test_mark'];
-                }else if ($data['course_mark']){
-                    $marksheet->course_mark = $data['course_mark'];
-                }
-                $marksheet->save();
-            }
 
-        }
-
+        $this->markInput($marks,$request);
         return response()->json( ['status' => 'success'] );
     }
 
@@ -110,15 +76,26 @@ class MarksheetController extends Controller
         return response()->json( ['status' => 'success'] );
     }
 
-    public function blankData(Request $request)
+    public function markInput($marks,$request)
     {
-        $marks = json_decode($request->marks, true);
         foreach ($marks as $key => $data){
             $marksheet = Marksheet::where('student_id',$data['student_id'])
                 ->where('course',$request->course_name)
                 ->where('term',$request->term)
                 ->first();
-            $marksheet->save();
+            if ($marksheet){
+                $marksheet->assignment = $data['assignment_mark'];
+                $marksheet->save();
+            }else{
+                $marksheet = new Marksheet();
+                $marksheet->student_id = $data['student_id'];
+                $marksheet->batch = $request->batch;
+                $marksheet->term = $request->term;
+                $marksheet->course = $request->course_name;
+                $marksheet->assignment = $data['assignment_mark'];
+                $marksheet->save();
+            }
+
         }
 
         return response()->json( ['status' => 'success'] );
