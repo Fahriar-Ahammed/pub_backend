@@ -17,13 +17,13 @@ class AttendanceController extends Controller
             $attendance = MidAttendance::where('batch',$request->batch)
                 ->where('course_name',$request->course_name)
                 ->whereDate('created_at',date('Y-m-d'))
-                ->select('student_id','attendance')
+                ->select('id','student_id','attendance')
                 ->get();
         }else{
             $attendance = FinalAttendance::where('batch',$request->batch)
                 ->where('course_name',$request->course_name)
                 ->whereDate('created_at',date('Y-m-d'))
-                ->select('student_id','attendance')
+                ->select('id','student_id','attendance')
                 ->get();
         }
 
@@ -101,18 +101,23 @@ class AttendanceController extends Controller
 
     public function update(Request $request)
     {
+        $attendanceData = json_decode($request->attendance, true);
         if ($request->term == 'Mid'){
-            foreach ($request->attendance as $key => $data){
-                $attendance = MidAttendance::find($request->id);
+            foreach ($attendanceData as $key => $data){
+                $attendance = MidAttendance::where('student_id');
+                $attendance->student_id = $data['student_id'];
+                $attendance->batch = $request->batch;
+                $attendance->course_name = $request->course_name;
                 $attendance->attendance = $data['attendance'];
-                $attendance->date = $data['date'];
                 $attendance->save();
             }
         }else{
-            foreach ($request->attendance as $key => $data){
-                $attendance = FinalAttendance::find($request->id);
+            foreach ($attendanceData as $key => $data){
+                $attendance = new FinalAttendance();
+                $attendance->student_id = $data['student_id'];
+                $attendance->batch = $request->batch;
+                $attendance->course_name = $request->course_name;
                 $attendance->attendance = $data['attendance'];
-                $attendance->date = $data['date'];
                 $attendance->save();
             }
         }
