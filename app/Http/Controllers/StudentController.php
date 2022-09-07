@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Marksheet;
+use App\Models\MidAttendance;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,9 +15,22 @@ class StudentController extends Controller
     {
         $student = DB::table('students')
             ->where('batch_id',$request->batch_id)
+            ->select('batch_id','pub_id')
             ->get();
+        $attendance = MidAttendance::where('batch',$request->batch)
+            ->where('course_name',$request->course_name)
+            ->whereDate('created_at',date('Y-m-d'))
+            ->first();
+        if ($attendance){
+            $attendanceTaken ="yes";
+        }else{
+            $attendanceTaken ="no";
+        }
 
-        return response()->json($student);
+        return response()->json([
+            'student' => $student,
+            'attendanceTaken' => $attendanceTaken
+        ]);
     }
 
     public function create(Request $request)
