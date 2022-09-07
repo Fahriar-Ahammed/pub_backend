@@ -63,7 +63,7 @@ class MarksheetController extends Controller
     {
         $marks = json_decode($request->marks, true);
 
-        $this->markInput($marks,$request);
+        $this->markInput($marks,$request,"assignment",'assignment_mark');
         return response()->json( ['status' => 'success'] );
     }
 
@@ -76,7 +76,7 @@ class MarksheetController extends Controller
         return response()->json( ['status' => 'success'] );
     }
 
-    public function markInput($marks,$request)
+    public function markInput($marks,$request,$dataType,$value)
     {
         foreach ($marks as $key => $data){
             $marksheet = Marksheet::where('student_id',$data['student_id'])
@@ -84,7 +84,7 @@ class MarksheetController extends Controller
                 ->where('term',$request->term)
                 ->first();
             if ($marksheet){
-                $marksheet->assignment = $data['assignment_mark'];
+                $marksheet->$dataType = $data[$value];
                 $marksheet->save();
             }else{
                 $marksheet = new Marksheet();
@@ -92,7 +92,7 @@ class MarksheetController extends Controller
                 $marksheet->batch = $request->batch;
                 $marksheet->term = $request->term;
                 $marksheet->course = $request->course_name;
-                $marksheet->assignment = $data['assignment_mark'];
+                $marksheet->$dataType = $data[$value];
                 $marksheet->save();
             }
 
