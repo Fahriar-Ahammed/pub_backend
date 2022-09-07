@@ -17,13 +17,13 @@ class AttendanceController extends Controller
             $attendance = MidAttendance::where('batch',$request->batch)
                 ->where('course_name',$request->course_name)
                 ->whereDate('created_at',date('Y-m-d'))
-                ->select('id','student_id','attendance')
+                ->select('student_id','attendance')
                 ->get();
         }else{
             $attendance = FinalAttendance::where('batch',$request->batch)
                 ->where('course_name',$request->course_name)
                 ->whereDate('created_at',date('Y-m-d'))
-                ->select('id','student_id','attendance')
+                ->select('student_id','attendance')
                 ->get();
         }
 
