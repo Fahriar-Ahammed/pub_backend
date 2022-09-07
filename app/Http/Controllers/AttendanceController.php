@@ -105,8 +105,8 @@ class AttendanceController extends Controller
         if ($request->term == 'Mid') {
             foreach ($attendanceData as $key => $data) {
                 $attendance = MidAttendance::where('student_id',$data['student_id'])
-                    ->where('batch', $request->batch)
                     ->where('course_name', $request->course_name)
+                    ->whereDate('created_at',date('Y-m-d'))
                     ->first();
                 $attendance->attendance = $data['attendance'];
                 $attendance->save();
@@ -114,8 +114,8 @@ class AttendanceController extends Controller
         } else {
             foreach ($attendanceData as $key => $data) {
                 $attendance = FinalAttendance::where('student_id',$data['student_id'])
-                    ->where('batch', $request->batch)
                     ->where('course_name', $request->course_name)
+                    ->whereDate('created_at',date('Y-m-d'))
                     ->first();
                 $attendance->attendance = $data['attendance'];
                 $attendance->save();
