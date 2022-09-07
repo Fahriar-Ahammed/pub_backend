@@ -13,10 +13,20 @@ class AttendanceController extends Controller
 {
     public function todayAttendance(Request $request)
     {
-        $attendance = MidAttendance::where('batch',$request->batch)
-            ->where('course_name',$request->course_name)
-            ->whereDate('created_at',date('Y-m-d'))
-            ->get();
+        if ($request->term == 'Mid'){
+            $attendance = MidAttendance::where('batch',$request->batch)
+                ->where('course_name',$request->course_name)
+                ->whereDate('created_at',date('Y-m-d'))
+                ->select('student_id','attendance')
+                ->get();
+        }else{
+            $attendance = FinalAttendance::where('batch',$request->batch)
+                ->where('course_name',$request->course_name)
+                ->whereDate('created_at',date('Y-m-d'))
+                ->select('student_id','attendance')
+                ->get();
+        }
+
 
         return response()->json($attendance);
     }
