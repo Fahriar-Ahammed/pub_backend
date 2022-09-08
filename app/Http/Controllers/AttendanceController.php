@@ -92,7 +92,7 @@ class AttendanceController extends Controller
                 }])
                 ->get();
             $attendanceCount = MidAttendance::where('batch',$request->batch)
-                ->where('course_name',$request->course_name)
+                ->where('course_name',$request->course)
                 ->distinct('created_at')
                 ->count();
         } else {
@@ -108,7 +108,7 @@ class AttendanceController extends Controller
                 ->get();
 
             $attendanceCount = FinalAttendance::where('batch',$request->batch)
-                ->where('course_name',$request->course_name)
+                ->where('course_name',$request->course)
                 ->distinct('created_at')
                 ->count();
         }
