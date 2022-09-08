@@ -87,7 +87,7 @@ class AttendanceController extends Controller
                     $query->where('course_name', $request->course);
                 }])
                 ->withCount(['midAttendanceCount' => function ($query) use ($request) {
-                    $query->where('course_name', $request->course_name)
+                    $query->where('course_name', $request->course)
                         ->where('attendance', 'p');
                 }])
                 ->get();
