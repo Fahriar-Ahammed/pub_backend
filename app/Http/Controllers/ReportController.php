@@ -15,6 +15,7 @@ class ReportController extends Controller
     {
         $markSheet = DB::table('marksheets')
             ->where('batch', $request->batch)
+            ->where('term', $request->term)
             ->where('course', $request->course)
             ->get();
 
