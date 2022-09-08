@@ -11,12 +11,10 @@ class ReportController extends Controller
 {
     public function index(Request $request)
     {
-        $attendance = Student::select('pub_id')
-            ->where('batch_id', $request->batch_id)
-            ->withCount(['midAttendanceCount' => function ($query) use ($request) {
-                $query->where('course_name', $request->course_name)
-                    ->where('attendance', 'p');
-            }])->get();
+        $attendance = MidAttendance::where('batch',$request->batch)
+            ->where('course_name',$request->course_name)
+            ->distinct('created_at')
+            ->count();
 
         return response()->json($attendance);
     }

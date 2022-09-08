@@ -91,16 +91,32 @@ class AttendanceController extends Controller
                         ->where('attendance', 'p');
                 }])
                 ->get();
+            $attendanceCount = MidAttendance::where('batch',$request->batch)
+                ->where('course_name',$request->course_name)
+                ->distinct('created_at')
+                ->count();
         } else {
             $attendance = Student::select('pub_id')
                 ->where('batch_id', $request->batch_id)
                 ->with(['finalAttendance' => function ($query) use ($request) {
                     $query->where('course_name', $request->course);
                 }])
+                ->withCount(['finalAttendanceCount' => function ($query) use ($request) {
+                    $query->where('course_name', $request->course)
+                        ->where('attendance', 'p');
+                }])
                 ->get();
+
+            $attendanceCount = FinalAttendance::where('batch',$request->batch)
+                ->where('course_name',$request->course_name)
+                ->distinct('created_at')
+                ->count();
         }
 
-        return response()->json($attendance);
+        return response()->json([
+            'attendance' => $attendance,
+            'total_attendance' => $attendanceCount
+        ]);
     }
 
     public function update(Request $request)
