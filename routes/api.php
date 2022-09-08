@@ -11,6 +11,7 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\ClassRoutineDaysController;
 use App\Http\Controllers\BatchesController;
 use App\Http\Controllers\DepartmentsController;
+use App\Http\Controllers\ReportController;
 
 
 Route::group(['middleware' => 'api'], function ($router) {
@@ -22,6 +23,8 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::post('register', 'AuthController@register');
     Route::get('user', 'AuthController@user');
 
+
+    Route::get('report',[ReportController::class,'index']);
     Route::prefix('batch')->group(function (){
         Route::get('all/{id}',[BatchesController::class,'all']);
     });
