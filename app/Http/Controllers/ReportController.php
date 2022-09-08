@@ -14,6 +14,7 @@ class ReportController extends Controller
     public function index(Request $request)
     {
         $markSheet = DB::table('marksheets')
+            ->select('student_id', 'assignment', 'class_test', 'presentation', 'course_mark')
             ->where('batch', $request->batch)
             ->where('term', $request->term)
             ->where('course', $request->course)
