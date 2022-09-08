@@ -24,7 +24,7 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::get('user', 'AuthController@user');
 
 
-    Route::get('report',[ReportController::class,'index']);
+    Route::post('report',[ReportController::class,'index']);
     Route::prefix('batch')->group(function (){
         Route::get('all/{id}',[BatchesController::class,'all']);
     });
