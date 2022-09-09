@@ -36,7 +36,7 @@ Route::group(['middleware' => 'api'], function ($router) {
 
 
     Route::prefix('assignment')->group(function () {
-        Route::get('all',[AssignmentController::class,'all']);
+        Route::post('all',[AssignmentController::class,'all']);
         Route::post('create',[AssignmentController::class,'create']);
         Route::get('view/{id}',[AssignmentController::class,'view']);
         Route::post('update',[AssignmentController::class,'update']);
