@@ -10,7 +10,7 @@ class CreatePresentationsTable extends Migration
     {
         Schema::create('presentations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('batch');
+            $table->bigInteger('batch_id');
             $table->string('term');
             $table->string('course_name');
             $table->string('presentation_details');

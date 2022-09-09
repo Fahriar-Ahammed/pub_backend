@@ -10,7 +10,7 @@ class CreateClassTestsTable extends Migration
     {
         Schema::create('class_tests', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('batch');
+            $table->bigInteger('batch_id');
             $table->string('term');
             $table->string('course_name');
             $table->string('class_test_details');

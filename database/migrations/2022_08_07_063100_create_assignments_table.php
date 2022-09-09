@@ -10,7 +10,7 @@ class CreateAssignmentsTable extends Migration
     {
         Schema::create('assignments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('batch');
+            $table->bigInteger('batch_id');
             $table->string('term');
             $table->string('course_name');
             $table->string('assignment_details');
