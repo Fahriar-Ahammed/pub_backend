@@ -39,9 +39,9 @@ class AssignmentController extends Controller
         return response()->json($assignment);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $assignment = assignment::find($id);
+        $assignment = assignment::find($request->id);
         $assignment->assignment_details = $request->assignment_details;
         $assignment->submission_date = $request->submission_date;
         $assignment->save();
