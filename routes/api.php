@@ -12,6 +12,7 @@ use App\Http\Controllers\ClassRoutineDaysController;
 use App\Http\Controllers\BatchesController;
 use App\Http\Controllers\DepartmentsController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\NoticesController;
 
 
 Route::group(['middleware' => 'api'], function ($router) {
@@ -23,6 +24,11 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::post('register', 'AuthController@register');
     Route::get('user', 'AuthController@user');
 
+    Route::prefix('notice')->group(function (){
+        Route::get('all',[NoticesController::class,'index']);
+        Route::post('create',[NoticesController::class,'create']);
+        Route::post('update',[NoticesController::class,'update']);
+    });
 
     Route::post('report',[ReportController::class,'index']);
     Route::prefix('batch')->group(function (){

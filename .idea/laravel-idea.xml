@@ -11,6 +11,7 @@
         </option>
       </LaravelCodeGeneration>
     </option>
+    <option name="enabledCheckType" value="manual" />
     <option name="frameworkFound" value="true" />
     <option name="generationStringSettings">
       <map>
@@ -18,6 +19,7 @@
         <entry key="createModel:namespace" value="Models" />
       </map>
     </option>
+    <option name="manualEnabled" value="true" />
     <option name="userClassName" value="App\Models\User" />
   </component>
 </project>

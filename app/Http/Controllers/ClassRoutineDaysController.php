@@ -17,7 +17,7 @@ class ClassRoutineDaysController extends Controller
             ->where('day',$today)
             ->with('nineAm','tenAm','twelvePm',
                     'twoPm','threePm')
-            ->get();
+            ->first();
 
         return response()->json($routine);
     }
