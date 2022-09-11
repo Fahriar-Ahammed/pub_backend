@@ -20,7 +20,6 @@ class NoticesController extends Controller
         $notice = new Notice();
         $notice->title = $request->title;
         $notice->details = $request->details;
-        $notice->date = $request->date;
         $notice->save();
 
         return response()->json(['status' => 'success']);
@@ -43,7 +42,6 @@ class NoticesController extends Controller
         $notice = Notice::find($request->id);
         $notice->title = $request->title;
         $notice->details = $request->details;
-        $notice->date = $request->date;
         $notice->save();
 
         return response()->json(['status' => 'success']);
