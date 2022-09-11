@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ClassRoutineDay;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -10,8 +11,10 @@ class ClassRoutineDaysController extends Controller
 {
     public function index(Request $request)
     {
+        $today = Carbon::today()->dayName;
         $routine = ClassRoutineDay::where('batch',$request->batch)
             ->where('department',$request->department)
+            ->where('day',$today)
             ->with('nineAm','tenAm','twelvePm',
                     'twoPm','threePm')
             ->get();
