@@ -28,25 +28,15 @@ class MarksheetController extends Controller
 
     public function create(Request $request)
     {
-        $marks = json_decode($request->marks, true);
-        foreach ($marks as $key => $data){
-            $marksheet = new Marksheet();
-            $marksheet->student_id = $data['student_id'];
-            $marksheet->batch = $request->batch;
-            $marksheet->term = $request->term;
-            $marksheet->course = $request->course_name;
-            if ($data['assignment_mark']){
-                $marksheet->assignment = $data['assignment_mark'];
-            }else if ($data['presentation_mark']){
-                $marksheet->presentation = $data['presentation_mark'];
-            }else if ($data['class_test_mark']){
-                $marksheet->class_test = $data['class_test_mark'];
-            }else if ($data['course_mark']){
-                $marksheet->course_mark = $data['course_mark'];
-            }
-            $marksheet->save();
-        }
+        $assignmentMarkData = json_decode($request->assignmentMarkData, true);
+        $classTestMarkData = json_decode($request->classTestMarkData, true);
+        $presentationMarkData = json_decode($request->presentationMarkData, true);
+        $courseMarkMarkData = json_decode($request->courseMarkMarkData, true);
 
+        $this->markInput($assignmentMarkData,$request,"assignment",'assignment_mark');
+        $this->markInput($classTestMarkData,$request,"class_test",'class_test_mark');
+        $this->markInput($presentationMarkData,$request,"presentation",'presentation_mark');
+        $this->markInput($courseMarkMarkData,$request,"course_mark",'course_mark');
         return response()->json( ['status' => 'success'] );
     }
 
