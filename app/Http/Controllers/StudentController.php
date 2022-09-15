@@ -33,6 +33,16 @@ class StudentController extends Controller
         ]);
     }
 
+    public function batchWise($id)
+    {
+        $student = DB::table('students')
+            ->where('batch_id',$id)
+            ->select('batch_id','pub_id','name')
+            ->get();
+
+        return response()->json($student);
+    }
+
     public function create(Request $request)
     {
         $student = new Student();
