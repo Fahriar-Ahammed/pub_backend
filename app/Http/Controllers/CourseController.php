@@ -14,10 +14,7 @@ class CourseController extends Controller
         $semester = Student::where('batch_id', $request->batch_id)
             ->first();
 
-        $course = DB::table('courses')
-            ->where('semester', $semester->semester)
-            ->where('teacher_id', $request->teacher_id)
-            ->get();
+        $course = DB::table('courses')->get();
 
         return response()->json($course);
     }
