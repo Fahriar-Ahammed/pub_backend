@@ -57,6 +57,23 @@ class StudentController extends Controller
         return response()->json( ['status' => 'success'] );
     }
 
+    public function createBulk(Request $request)
+    {
+        $studentData = json_decode($request->studentData, true);
+        foreach ($studentData as $key => $data){
+            $student = new Student();
+            $student->batch_id = $request->batch_id;
+            $student->pub_id = $data['pub_id'];
+            $student->name = $data['name'];
+            $student->semester = "";
+            $student->contact_number = "";
+            $student->parents_number = "";
+            $student->save();
+        }
+
+        return response()->json( ['status' => 'success'] );
+    }
+
     public function view($id)
     {
         $student = Student::find($id);

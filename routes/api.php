@@ -61,6 +61,7 @@ Route::group(['middleware' => 'api'], function ($router) {
         Route::post('all',[StudentController::class,'all']);
         Route::get('batch-wise/{id}',[StudentController::class,'batchWise']);
         Route::post('create',[StudentController::class,'create']);
+        Route::post('create-bulk',[StudentController::class,'createBulk']);
         Route::get('view/{id}',[StudentController::class,'view']);
         Route::post('update',[StudentController::class,'update']);
         Route::get('delete/{id}',[StudentController::class,'delete']);
