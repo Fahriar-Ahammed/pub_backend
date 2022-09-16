@@ -37,7 +37,7 @@ class StudentController extends Controller
     {
         $student = DB::table('students')
             ->where('batch_id',$id)
-            ->select('batch_id','pub_id','name')
+            ->select('batch_id','id','pub_id','name')
             ->get();
 
         return response()->json($student);
