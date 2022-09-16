@@ -27,12 +27,14 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::prefix('notice')->group(function (){
         Route::get('all',[NoticesController::class,'index']);
         Route::post('create',[NoticesController::class,'create']);
+
         Route::post('update',[NoticesController::class,'update']);
     });
 
     Route::post('report',[ReportController::class,'index']);
     Route::prefix('batch')->group(function (){
         Route::get('all/{id}',[BatchesController::class,'all']);
+        Route::post('create',[BatchesController::class,'create']);
     });
 
     /*department api*/

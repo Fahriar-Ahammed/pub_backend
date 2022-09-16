@@ -26,9 +26,14 @@ class BatchesController extends Controller
         return response()->json($batch);
     }
 
-    public function create()
+    public function create(Request $request)
     {
+        $batch = new Batch();
+        $batch->department_id = $request->department_id;
+        $batch->name = $request->name;
+        $batch->save();
 
+        return response()->json(['status' => 'success']);
     }
 
     public function store(Request $request)
