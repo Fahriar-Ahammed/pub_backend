@@ -49,7 +49,7 @@ class AuthController extends Controller
         $user->contact_number = "";
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
-        $user->menuroles = 'user';
+        $user->menuroles = 'teacher';
         $user->status = 'Active';
         $user->save();
         return response()->json(['status' => 'success'], 200);
