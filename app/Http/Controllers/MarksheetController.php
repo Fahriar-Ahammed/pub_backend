@@ -85,6 +85,7 @@ class MarksheetController extends Controller
             }else{
                 $marksheet = new Marksheet();
                 $marksheet->student_id = $data['student_id'];
+                $marksheet->teacher_id = $request->teacher_id;
                 $marksheet->batch = $request->batch;
                 $marksheet->term = $request->term;
                 $marksheet->course = $request->course_name;

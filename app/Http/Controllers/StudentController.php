@@ -49,9 +49,6 @@ class StudentController extends Controller
         $student->batch_id = $request->batch_id;
         $student->pub_id = $request->pub_id;
         $student->name = $request->name;
-        $student->semester = "";
-        $student->contact_number = "";
-        $student->parents_number = "";
         $student->save();
 
         return response()->json( ['status' => 'success'] );
@@ -65,9 +62,6 @@ class StudentController extends Controller
             $student->batch_id = $request->batch_id;
             $student->pub_id = $data['pub_id'];
             $student->name = $data['name'];
-            $student->semester = "";
-            $student->contact_number = "";
-            $student->parents_number = "";
             $student->save();
         }
 

@@ -10,6 +10,7 @@ class CreateMarksheetsTable extends Migration
     {
         Schema::create('marksheets', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('teacher_id');
             $table->bigInteger('student_id');
             $table->string('batch');
             $table->string('course');
