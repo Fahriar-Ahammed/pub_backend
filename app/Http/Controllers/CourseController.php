@@ -9,12 +9,13 @@ use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
 {
-    public function courseBatchWise(Request $request)
+    public function courseSemesterWise(Request $request)
     {
-        $semester = Student::where('batch_id', $request->batch_id)
-            ->first();
-
-        $course = DB::table('courses')->get();
+        $course = DB::table('courses')
+            ->where('department_id',$request->id)
+            ->where('semester',$request->semester)
+            ->select('course_code','course_title')
+            ->get();
 
         return response()->json($course);
     }

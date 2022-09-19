@@ -83,7 +83,7 @@ Route::group(['middleware' => 'api'], function ($router) {
         Route::get('view/{id}',[CourseController::class,'view']);
         Route::post('update',[CourseController::class,'update']);
         Route::get('delete/{id}',[CourseController::class,'delete']);
-        Route::post('batch-wise',[CourseController::class,'courseBatchWise']);
+        Route::post('batch-wise',[CourseController::class, 'courseSemesterWise']);
     });
 
     /**attendance api*/
